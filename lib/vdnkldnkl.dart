@@ -1,3 +1,6 @@
+
+/*
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qms/data/post_api_service.dart';
@@ -8,16 +11,16 @@ import 'package:qms/models/models.dart';
 import 'package:date_format/date_format.dart';
 
 
-class QueuesPage extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
   final String text;
-  QueuesPage({Key key, this.text}) : super(key: key);
+  MyHomePage({Key key, this.text}) : super(key: key);
   
 
   @override
-  _QueuesPageState createState() =>  _QueuesPageState();
+  _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _QueuesPageState extends State<QueuesPage> {
+class _MyHomePageState extends State<MyHomePage> {
   TextEditingController editingController = TextEditingController();
    String text;
     List<Queue> dummyListData = List();
@@ -58,7 +61,7 @@ class _QueuesPageState extends State<QueuesPage> {
   void initState() {
     items.addAll(duplicateItems);
     super.initState();
-    
+    print("This@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{$items}");
   }
 
   void filterSearchResults(String query) {
@@ -66,9 +69,7 @@ class _QueuesPageState extends State<QueuesPage> {
     if(query.isNotEmpty) {
     
       duplicateItems.forEach((item) {
-        if(item.checkpoint.toLowerCase().contains(query.toLowerCase())||item.driverName.toLowerCase().contains(query.toLowerCase())
-        ||item.orderNumber.toLowerCase().contains(query.toLowerCase())||item.vehicleNumber.toLowerCase().contains(query.toLowerCase())
-        ||item.omc.toLowerCase().contains(query.toLowerCase())||item.queueNumber.toLowerCase().contains(query.toLowerCase())){
+        if(item.checkpoint.toLowerCase().contains(query.toLowerCase())) {
           items.add(item);
         }
       });
@@ -86,9 +87,9 @@ class _QueuesPageState extends State<QueuesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar:  AppBar(
-        title:  Text("Queues"),
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("queueue"),
       ),
       body: Container(
         child: Column(
@@ -119,55 +120,14 @@ class _QueuesPageState extends State<QueuesPage> {
   }
   
 
-  Widget _createListView(BuildContext context, List item){
+  Widget _createListView(BuildContext context, List robber){
     return Flexible(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: item.length,
+                itemCount: robber.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    child: Center(
-                      child: Card(
-                        color: HexColor(item[index].color),
-                        elevation: 5,
-                       child: ListTile(
-                isThreeLine: true,
-                
-                leading: Icon(Icons.queue, color: Colors.black,),               
-                title: Text("Queue Number: ${item[index].queueNumber}", 
-                          style: TextStyle(
-                          
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(4),
-                    ),
-
-                    Text(item[index].checkpoint,
-                          
-                          style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold,color: Colors.black)),
-                    Text(item[index].vehicleNumber,
-                          
-                          style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold,color: Colors.black),),
-                 Text(item[index].omc,
-                          
-                          style: TextStyle(fontSize: 14.0,fontWeight: FontWeight.bold,),),
-                 Text(item[index].driverName,
-                          
-                          style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),),
-                 Text(formatDate(DateTime.parse(item[index].time), [d, '-', M, '-', yyyy, ', ', HH, ':', nn]),
-                          
-                          style: TextStyle(fontSize:14.0, fontWeight: FontWeight.bold,),)
-                  ],
-                ),
-                
-                contentPadding: EdgeInsets.all(10),  ),
-                      ),
-                    ),
+                  return ListTile(
+                    title: Text(robber[index].checkpoint),
                   );
                 },
               ),
@@ -175,3 +135,5 @@ class _QueuesPageState extends State<QueuesPage> {
 
   }
 } 
+
+*/

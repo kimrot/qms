@@ -25,6 +25,10 @@ class MyApp extends StatelessWidget {
       builder: (_) =>PostApiService.create(),
       dispose: (_, PostApiService service) =>service.client.dispose(),
       child: MaterialApp(
+
+        theme: new ThemeData(
+        primarySwatch: Colors.red,
+      ),
         debugShowCheckedModeBanner:false,
       title: 'Material App',
       home: LoginPage(),

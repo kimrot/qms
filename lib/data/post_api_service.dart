@@ -1,4 +1,8 @@
 //import 'package:qms/models/models.dart';
+
+
+
+
 import 'package:chopper/chopper.dart';
 
 part 'post_api_service.chopper.dart';
@@ -7,6 +11,7 @@ part 'post_api_service.chopper.dart';
 abstract class PostApiService extends ChopperService {
 @Post()
 Future<Response> loginUser();
+
  @Body() Map<String, dynamic> body;
 
 @Get(path:'depots')
@@ -21,7 +26,7 @@ Future<Response> getOrders();
 Future<Response > getQueues(@Path() int id);
 
 static PostApiService create (){
-  final client= ChopperClient(baseUrl:'https://qmsnakuru.kpc.co.ke' ,
+  final client= ChopperClient(baseUrl:'https://qmseldoret.kpc.co.ke' ,
   services: [
     _$PostApiService()],
   converter: JsonConverter(),

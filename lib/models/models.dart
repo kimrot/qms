@@ -1,6 +1,32 @@
 
 
 
+import 'dart:ui';
+
+
+
+
+class Login {
+    int status;
+    String message;
+
+    Login({
+        this.status,
+        this.message,
+    });
+
+    factory Login.fromJson(Map<String, dynamic> json) => Login(
+        status: json["status"],
+        message: json["message"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "status": status,
+        "message": message,
+    };
+}
+
+
 class Depot {
   final int id;
   final String code;
@@ -38,17 +64,21 @@ class Contents{
   final int id;
   final String products;
   final String criteria;
-  final String order_type;
+  final String orderType;
+  final String loading;
+  final String color;
 
 
-  Contents({ this.id, this.products, this.criteria, this.order_type});
+  Contents({ this.color, this.id, this.products, this.criteria,this.loading, this.orderType});
 
   factory Contents.fromJson(Map<String, dynamic>fromJson){
     return Contents(
       products:fromJson['products'],
       criteria:fromJson['criteria'],
-      order_type: fromJson['order_type'],
-      id: fromJson['id']
+      orderType: fromJson['order_type'],
+      loading: fromJson['loading'],
+      id: fromJson['id'],
+      color: fromJson['color']
     );
   }
 
@@ -111,4 +141,17 @@ class Time{
       time:fromJson['time']
     );
   }
+}
+
+
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll("#", "");
+    if (hexColor.length == 6) {
+      hexColor = "FF" + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }

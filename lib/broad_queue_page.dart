@@ -4,29 +4,30 @@ import 'package:qms/data/post_api_service.dart';
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
 import 'package:qms/models/models.dart';
-//import 'package:qms/queue_buttons_page.dart';
 import 'package:qms/queues_page.dart';
-//import 'package:qms/models/models.dart';
+
 
 
 class BroadQueuesPage extends StatelessWidget {
    final String text;
-  
  BroadQueuesPage({Key key, @required this.text}) : super(key: key);
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-        child: Text('BroadQueues', textAlign:TextAlign.center)),
+        child: Text('Products Type', textAlign:TextAlign.center)),
         backgroundColor: Colors.red,
+        
              ),
       body: Center(child: _buildBody(context)),
       
            );
        }
   FutureBuilder<Response> _buildBody(BuildContext context){
-
+ print(text);
     List<Contents> list;
     List<Contents> localOrders = List();
     List<Contents> exportOrders= List();
@@ -38,16 +39,15 @@ class BroadQueuesPage extends StatelessWidget {
 
            var orders = json.decode(snapshot.data.bodyString);
             var conts = orders['content'] as List;
-             
+             print(text);
              list = conts.map<Contents>((json)=>Contents.fromJson(json)).toList();
-                  
+                  localOrders.clear();
               for(var i in list){
-                  if (i.order_type == "Local") {
+                  if (i.orderType == "Local") {
                     localOrders.add(i);
                   }
               }
 
-                
               return _buildorders(context, localOrders);
 
          
@@ -62,6 +62,7 @@ class BroadQueuesPage extends StatelessWidget {
       }
     );
     } 
+  
      if (text == "Export") {
     return FutureBuilder<Response>(
       future: Provider.of<PostApiService>(context).getOrders(),
@@ -70,11 +71,11 @@ class BroadQueuesPage extends StatelessWidget {
 
            var orders = json.decode(snapshot.data.bodyString);
             var conts = orders['content'] as List;
-             
+             print(text);
              list = conts.map<Contents>((json)=>Contents.fromJson(json)).toList();
-                  
+                  exportOrders.clear();
               for(var i in list){
-                  if (i.order_type == "Export") {
+                  if (i.orderType == "Export") {
                     exportOrders.add(i);
                   }
               }
@@ -93,6 +94,7 @@ class BroadQueuesPage extends StatelessWidget {
       }
     );
     } 
+    return _buildBody(context);
   }
 
   ListView _buildorders(BuildContext context, List orders){
@@ -102,23 +104,33 @@ class BroadQueuesPage extends StatelessWidget {
       itemBuilder: (contex, index){
         
         return Container(
-          height: 105,
+          
           child: Center(
             
             child: Card(
               color: Colors.white,
-              elevation: 8,
+              elevation: 10,
               child: ListTile(
+                isThreeLine: true,
                 
-                leading: Icon(Icons.location_on, color: Colors.black,),
+                leading: Icon(Icons.queue, color: Colors.black,),
                 trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black,),
                 title: Text(orders[index].products, 
-                style: TextStyle(fontSize:30.0,fontWeight: FontWeight.w800, color: Colors.black),
+                style: TextStyle(fontSize:20.0,fontWeight: FontWeight.w800, color: Colors.black),
                 
                 ),
-                subtitle: Text(orders[index].criteria,
-                style: TextStyle(fontSize:25.0,fontWeight: FontWeight.w800, color: Colors.red),),
+                subtitle: Column(
+                  children: <Widget>[
+                    Text(orders[index].criteria,
+                style: TextStyle(fontSize:16.0,fontWeight: FontWeight.w800, color: Colors.red)),
+                    Text(orders[index].loading,
+                style: TextStyle(fontSize:16.0,fontWeight: FontWeight.w800, color: Colors.blue))
+                  ],
+                ),
                 
+                // subtitle: Text(orders[index].criteria,
+                // style: TextStyle(fontSize:25.0,fontWeight: FontWeight.w800, color: Colors.red),),
+                  
                 contentPadding: EdgeInsets.all(10),
 
                 

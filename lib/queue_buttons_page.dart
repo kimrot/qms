@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qms/broad_queue_page.dart';
-import 'package:qms/depots_page.dart';
+//import 'package:qms/depots_page.dart';
 
 
 
@@ -14,6 +14,7 @@ class QueueButtonPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.red,
         title: Text('Select Your Order Type'),
       ),
     
@@ -25,10 +26,15 @@ class QueueButtonPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             
             children: [
-              SizedBox(height: 40,),
-              ButtonTheme(
-                minWidth: 300,
-                height: 110.0,                
+              SizedBox(height: 20,),
+
+              Card(
+
+              child:ButtonTheme(
+                height: 100,
+                minWidth: double.infinity,
+
+                                
               child: RaisedButton(
                   child: Text("Local",
                   style: TextStyle(
@@ -45,29 +51,33 @@ class QueueButtonPage extends StatelessWidget {
                   },
                   
                 ),
+              )
               ),
              SizedBox(
-               height: 20,
+               height: 10,
                ),
-             ButtonTheme(
-                minWidth: 300.0,
-                height: 110.0,                
-              child: RaisedButton(
-                  child: Text("Export",
-                  style: TextStyle(
-                    fontSize: 30
-                  ),),
-                  color: Colors.red,
-                  textColor: Colors.white,
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  splashColor: Colors.black,
-                  onPressed:(){
-                       Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => BroadQueuesPage(text:'Export',))
-                   );
-                  },
-                  
+             Card(
+               
+                            child: ButtonTheme(
+                              height: 100,
+                  minWidth: double.maxFinite,             
+                child: RaisedButton(
+                    child: Text("Export",
+                    style: TextStyle(
+                      fontSize: 30
+                    ),),
+                    color: Colors.red,
+                    textColor: Colors.white,
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    splashColor: Colors.black,
+                    onPressed:(){
+                         Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => BroadQueuesPage(text:'Export',))
+                     );
+                    },
+                    
+                  ),
                 ),
-              ),
+             ),
             ],
           ),
         ),
